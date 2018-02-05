@@ -26,7 +26,7 @@ public class VentPortal : MonoBehaviour
 		
 	}
 
-	void OnTriggerStay2D (Collider2D col)
+	private void OnTriggerStay2D (Collider2D col)
 	{
 		if (Input.GetKeyDown(KeyCode.DownArrow))
 		{
