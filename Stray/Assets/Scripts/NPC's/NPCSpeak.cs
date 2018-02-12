@@ -4,10 +4,11 @@ using UnityEngine;
 
 public class NPCSpeak : MonoBehaviour 
 {
-	public GameObject speechBubble;
+	public GameObject collectible;
 	private Vector2 npcPosition;
 	private float npcX;
 	private float npcY;
+	private bool noteGiven;
 
 	// Use this for initialization
 	void Start () 
@@ -15,6 +16,7 @@ public class NPCSpeak : MonoBehaviour
 		npcPosition = gameObject.transform.position;
 		npcX = npcPosition.x;
 		npcY = npcPosition.y;
+		noteGiven = false;
 	}
 	
 	// Update is called once per frame
@@ -25,9 +27,10 @@ public class NPCSpeak : MonoBehaviour
 
 	private void OnTriggerStay2D()
 	{
-		if(Input.GetKeyDown(KeyCode.DownArrow))
+		if(Input.GetKeyDown(KeyCode.S) && noteGiven == false)
 		{
-			Instantiate(speechBubble, new Vector2(npcX + 2, npcY + 1), Quaternion.identity);
+			Instantiate(collectible, new Vector2(npcX + 1, npcY + .5f), Quaternion.identity);
+			noteGiven = true;
 		}
 	}
 }

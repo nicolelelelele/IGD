@@ -8,11 +8,12 @@ public class VentPortal : MonoBehaviour
 	private Vector2 buddyPosition;
 	private float buddyPosX;
 	private float buddyPosY;
-	public GameObject player;
+	private GameObject player;
 
 	// Use this for initialization
 	void Start () 
 	{
+		player = GameObject.FindGameObjectWithTag("Player");
 		buddyPosition = ventBuddy.transform.position;
 		buddyPosX = buddyPosition.x;
 		buddyPosY = buddyPosition.y;
@@ -28,7 +29,7 @@ public class VentPortal : MonoBehaviour
 
 	private void OnTriggerStay2D (Collider2D col)
 	{
-		if (Input.GetKeyDown(KeyCode.DownArrow))
+		if (Input.GetKeyDown(KeyCode.E))
 		{
 			player.transform.position = new Vector2(buddyPosX, buddyPosY);
 			Debug.Log("entered portal");
