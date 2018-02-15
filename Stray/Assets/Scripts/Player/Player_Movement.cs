@@ -8,22 +8,22 @@ public class Player_Movement : MonoBehaviour {
 // What's happenning to the player's RB
 // Transform modifications
 
-	private Rigidbody2D _myRB2D;
+	private Rigidbody2D rb2d;
 
-	private Ray2D _touchingGroundRay;
-	private RaycastHit2D _myRCH;
-	private Ray2D attackRay;
-	private RaycastHit2D attackHit;
+	private Ray2D touchingGroundRay;
+	private RaycastHit2D myRCH;
+	//private Ray2D attackRay;
+	//private RaycastHit2D attackHit;
 
 	public bool facingRight = true;
-	public float moveX;
+	private float moveX;
 
 
 
 	// Use this for initialization
 	private void Start () 
 	{
-		_myRB2D = GetComponent<Rigidbody2D>();
+		rb2d = GetComponent<Rigidbody2D>();
 	}
 	
 	// Update is called once per frame
@@ -31,41 +31,29 @@ public class Player_Movement : MonoBehaviour {
 	{
 		if(Input.GetKey(KeyCode.A))
 		{
-			_myRB2D.AddForce(Vector3.right * -50);
+			rb2d.AddForce(Vector3.right * -50);
 		}
 		if(Input.GetKey(KeyCode.D))
 		{
-			_myRB2D.AddForce(Vector3.right * 50);
+			rb2d.AddForce(Vector3.right * 50);
 		}
 
-		_touchingGroundRay = new Ray2D(transform.position - Vector3.up * .35f, Vector3.up * -.1f);
+		touchingGroundRay = new Ray2D(transform.position - Vector3.up * .35f, Vector3.up * -.1f);
 
-		//Debug.DrawRay(_touchingGroundRay.origin, _touchingGroundRay.direction * .1f);
+		//Debug.DrawRay(touchingGroundRay.origin, touchingGroundRay.direction * .1f);
 
-		_myRCH = Physics2D.Raycast (_touchingGroundRay.origin, _touchingGroundRay.direction, .1f);
+		myRCH = Physics2D.Raycast (touchingGroundRay.origin, touchingGroundRay.direction, .1f);
 
-		//Debug.Log (_myRCH.collider.gameObject.name);
+		//Debug.Log (myRCH.collider.gameObject.name);
 
 		if(Input.GetKeyDown(KeyCode.W))
 		{
-			if (_myRCH.collider.tag == "Ground" || _myRCH.collider.tag == "Enemy")
+			if (myRCH.collider.tag == "Ground" || myRCH.collider.tag == "Enemy")
 			{
 				//Debug.Log ("this works");
-				_myRB2D.AddForce(Vector3.up *20, ForceMode2D.Impulse);
+				rb2d.AddForce(Vector3.up *20, ForceMode2D.Impulse);
 			}
 		}
-
-		/*attackRay = new Ray2D(transform.position + Vector3.right * .5f, Vector3.right);
-		
-		attackHit = Physics2D.Raycast(attackRay.origin, attackRay.direction, .1f);
-		//Debug.Log(attackHit.collider.gameObject.name);
-		if(Input.GetKeyDown(KeyCode.Return))
-		{
-			if (attackHit.collider.tag == "Enemy")
-			{
-				Destroy(attackHit.collider.gameObject);
-			}
-		}*/
 		
 		moveX = Input.GetAxis("Horizontal");
 
@@ -91,7 +79,17 @@ public class Player_Movement : MonoBehaviour {
 		transform.localScale = localScale;
 	}
 
+	public IEnumerator Knockback(float knockDuration, float knockPower, Vector3 knockDirection)
+	{
+		float timer = 0;
+		while (knockDuration > timer)
+		{
+			timer += Time.deltaTime;
+			rb2d.AddForce(new Vector3(knockDirection.x * -100, knockDirection.y * knockPower, transform.position.z));
+		}
 
+		yield return 0;
+	}
 
 
 }
@@ -104,8 +102,6 @@ public class Player_Movement : MonoBehaviour {
 
 
 
-
-// F/I -> RB
 
 
 

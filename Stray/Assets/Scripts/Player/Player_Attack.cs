@@ -4,42 +4,41 @@ using UnityEngine;
 
 public class Player_Attack : MonoBehaviour 
 {
+	private bool attacking;
+	private float attackTimer = 0f;
+	private float attackCoolDown = 0.3f;
 
-	public Rigidbody2D hammer;
-	public float hammerReturnForceMagnitude;
-	public float hammerShootForceMagnitude;
-
-	private Vector3 _dir;
+	public Collider2D attackTrigger;
+	
+	void Awake()
+	{
+		attackTrigger.enabled = false;
+	}
 	
 	
 	void Update () 
 	{
-		//hammer.AddForce(Vector3.Normalize(transform.position - hammer.transform.position) * hammerReturnForceMagnitude);
+		
+		if (Input.GetKeyDown(KeyCode.Return) && !attacking)
+		{
+			attacking = true;
+			attackTimer = attackCoolDown;
 
-		_dir = Vector3.zero;
-
-		if (Input.GetKey(KeyCode.A))
-		{
-			_dir += Vector3.right * -1;
-		}	
-		if (Input.GetKey(KeyCode.D))
-		{
-			_dir += Vector3.right;
-		}
-		if (Input.GetKey(KeyCode.W))
-		{
-			_dir += Vector3.up;
-		}
-		if (Input.GetKey(KeyCode.A))
-		{
-			_dir += Vector3.up * -1;
+			attackTrigger.enabled = true;
 		}
 
-		_dir = Vector3.Normalize(_dir);
-
-		if (Input.GetKeyDown(KeyCode.K))
+		if (attacking)
 		{
-			hammer.AddForce(_dir * hammerShootForceMagnitude, ForceMode2D.Impulse);
+			if (attackTimer > 0)
+			{
+				attackTimer -= Time.deltaTime;
+			}
+			else
+			{
+				attacking = false;
+				attackTrigger.enabled = false;
+			}
 		}
+
 	}
 }

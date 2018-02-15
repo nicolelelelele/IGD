@@ -3,25 +3,26 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class EnemyMove : MonoBehaviour 
+public class EnemyAI : MonoBehaviour 
 {
+
+
 	public int enemySpeed;
 	public int xMoveDirection;
 
-	void Update()
+	void Start()
 	{
 
+	}
+
+	void Update()
+	{
 		RaycastHit2D hit = Physics2D.Raycast (transform.position, new Vector2 (xMoveDirection, 0));
 		gameObject.GetComponent<Rigidbody2D>().velocity = new Vector2 (xMoveDirection, 0) * enemySpeed; 
 		if (hit.distance < 0.3f)
 		{
 			Flip();	
-			if (hit.collider.tag == "Player")
-			{
-				Debug.Log("hit player");
-				Destroy (hit.collider.gameObject);
-				SceneManager.LoadScene ("Prototype_1");
-			}
+
 		}
 	}
 
@@ -35,5 +36,10 @@ public class EnemyMove : MonoBehaviour
 		{
 			xMoveDirection = 1; 	
 		}
+		Vector2 localScale = gameObject.transform.localScale;
+		localScale.x *= -1;
+		transform.localScale = localScale;
 	}
+
+	
 }
