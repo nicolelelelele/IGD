@@ -83,6 +83,6 @@ public class Player_Health : MonoBehaviour
 
 	void Die ()
 	{	
-		SceneManager.LoadScene ("UpdatedPrototype");
+		SceneManager.LoadScene ("Visuals");
 	}
 }
