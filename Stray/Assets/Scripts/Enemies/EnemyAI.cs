@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 public class EnemyAI : MonoBehaviour 
 {
 
-
 	public int enemySpeed;
 	public int xMoveDirection;
 
@@ -25,6 +24,15 @@ public class EnemyAI : MonoBehaviour
 
 		}
 	}
+
+	/*void OnTriggerEnter2D(Collider2D collider)
+	{
+		if(collider.gameObject.tag == "EnemyBump")
+		{
+			Debug.Log("bumped");
+			Flip();
+		}
+	}*/
 
 	void Flip()
 	{

@@ -8,12 +8,12 @@ public class VentPortal : MonoBehaviour
 	private Vector2 buddyPosition;
 	private float buddyPosX;
 	private float buddyPosY;
-	private GameObject player;
+	public GameObject player;
 
 	// Use this for initialization
 	void Start () 
 	{
-		player = GameObject.FindGameObjectWithTag("Player");
+		//player = GameObject.FindGameObjectWithTag("Player");
 		buddyPosition = ventBuddy.transform.position;
 		buddyPosX = buddyPosition.x;
 		buddyPosY = buddyPosition.y;

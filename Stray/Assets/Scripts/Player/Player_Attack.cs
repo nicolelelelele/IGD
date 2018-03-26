@@ -19,7 +19,7 @@ public class Player_Attack : MonoBehaviour
 	void Update () 
 	{
 		
-		if (Input.GetKeyDown(KeyCode.Return) && !attacking)
+		if (Input.GetKeyDown(KeyCode.Space) && !attacking)
 		{
 			attacking = true;
 			attackTimer = attackCoolDown;

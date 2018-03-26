@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -9,6 +9,7 @@ public class NPCSpeak : MonoBehaviour
 	private float npcX;
 	private float npcY;
 	private bool noteGiven;
+	
 
 	// Use this for initialization
 	void Start () 
@@ -27,6 +28,7 @@ public class NPCSpeak : MonoBehaviour
 
 	private void OnTriggerStay2D()
 	{
+		
 		if(Input.GetKeyDown(KeyCode.S) && noteGiven == false)
 		{
 			Instantiate(collectible, new Vector2(npcX + 1, npcY + .5f), Quaternion.identity);

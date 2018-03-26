@@ -11,7 +11,7 @@ public class attackTrigger : MonoBehaviour
 		if(collider.isTrigger != true && collider.CompareTag("Enemy"))
 		{
 			collider.SendMessageUpwards("Damage", damage);
-			Debug.Log("collided w/ Enemy");
+			//Debug.Log("collided w/ Enemy");
 		}
 	}
 	

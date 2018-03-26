@@ -8,6 +8,12 @@ TagManager:
   - Portal
   - Stoppers
   - Enemy
+  - Health
+  - Wall
+  - GroundWall
+  - EnemyBack
+  - EnemyBump
+  - PlayerAttack
   layers:
   - Default
   - TransparentFX
@@ -21,7 +27,7 @@ TagManager:
   - Portal
   - Ground
   - Enemies
-  - 
+  - Wall
   - 
   - 
   - 

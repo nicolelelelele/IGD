@@ -1,10 +1,12 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Enemy_Health : MonoBehaviour {
 
-	private int currentHealth = 50;
+	public int currentHealth;
+	public GameObject item;
 	
 	// Update is called once per frame
 	void Update () 
@@ -13,6 +15,7 @@ public class Enemy_Health : MonoBehaviour {
 		if(currentHealth <= 0)
 		{
 			Destroy(gameObject);
+			item.SetActive(true);
 		}
 	}
 
